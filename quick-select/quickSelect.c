@@ -9,8 +9,8 @@ int error_k = 0;
 
 // Estrutura para a lista de números que será fornecida
 typedef struct Lista {
-    int valor;
-    struct Lista* next;
+  int valor;
+  struct Lista* next;
 } Lista;
 
 
@@ -118,19 +118,19 @@ int main(int argc, char *argv[]){
   }
 
   if(!flag){
-      printf("Não foi informado o k-ésimo menor elemento desejado. Insira -k VALOR\n");
-      return 1;
+    printf("Não foi informado o k-ésimo menor elemento desejado. Insira -k VALOR\n");
+    return 1;
   }
 
   printf("Insira os números do vetor (a cada número digite ENTER e, para parar, digite ENTER sem nenhum número na linha):\n");
 
   while (fgets(input, MAX_TAM_INPUT, stdin) != NULL) {
-      valor = strtol(input, &fimptr, 10);
-      if (fimptr == input || *fimptr != '\n') {
-          break;
-      }
-      acrescentaNaLista(&lista, (int)valor);
-      tam++;
+    valor = strtol(input, &fimptr, 10);
+    if (fimptr == input || *fimptr != '\n') {
+        break;
+    }
+    acrescentaNaLista(&lista, (int)valor);
+    tam++;
   }
 
   vetor = listaParaVetor(lista, tam);
