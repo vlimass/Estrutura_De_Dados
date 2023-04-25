@@ -2,8 +2,45 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_TAM_INPUT 20 // Tamanho máximo do input de um número da lista
+
 // Erro para caso em que o K escolhido é inválido
 int error_k = 0;
+
+// Estrutura para a lista de números que será fornecida
+typedef struct Lista {
+    int valor;
+    struct Lista* next;
+} Lista;
+
+
+void acrescentaNaLista(Lista** lista, int valor) {
+  Lista* new_List = (Lista*)malloc(sizeof(Lista));
+  new_List->valor = valor;
+  new_List->next = NULL;
+
+  if (*lista == NULL) {
+      *lista = new_List;
+  } else {
+      Lista* current = *lista;
+      while (current->next != NULL) {
+          current = current->next;
+      }
+      current->next = new_List;
+  }
+}
+
+int* listaParaVetor(Lista* vetor, int tamanho) {
+  int* novoVetor = (int*)malloc(tamanho * sizeof(int));
+  Lista* current = vetor;
+  int i = 0;
+  while (current != NULL) {
+      novoVetor[i] = current->valor;
+      current = current->next;
+      i++;
+  }
+  return novoVetor;
+}
 
 void troca(int *a, int *b){
   int tmp = *a;
@@ -47,7 +84,7 @@ int quickSelect(int vet[], int inicio, int fim, int k) {
   } else {
     // Caso de erro: valor de K é inválido
     error_k++;
-    printf("ERRO! O k-ésimo inserido é inválido. Por favor, insira outro valor para K!\n");
+    printf("ERRO! O k-ésimo inserido é inválido para este vetor. Por favor, insira outro valor para K!\n");
 
     return -1;
   }
@@ -55,11 +92,15 @@ int quickSelect(int vet[], int inicio, int fim, int k) {
 }
 
 int main(int argc, char *argv[]){
-  int arr[] = { 10, 4, 5, 8, 6, 11, 26, 192, 45, 123, -12, 32, 2, 6};
-  int tam = sizeof(arr) / sizeof(arr[0]);
+  Lista* lista = NULL;
+  char input[MAX_TAM_INPUT];
+  long int valor;
+  char * fimptr;
+  int * vetor;
+  int tam = 0;
   int k;
   int flag = 0; // Aviso para casos de input não aceitos pelo programa
-  int result;
+  int resultado;
 
   if(argc <= 1) {
     printf("É necessário inserir como parâmetro -k VALOR para buscar o k-ésimo menor elemento do vetor.\n");
@@ -77,13 +118,25 @@ int main(int argc, char *argv[]){
   }
 
   if(!flag){
-      printf("\tNão foi informado o k-ésimo menor elemento desejado. Insira -k VALOR\n");
+      printf("Não foi informado o k-ésimo menor elemento desejado. Insira -k VALOR\n");
       return 1;
   }
 
+  printf("Insira os números do vetor (a cada número digite ENTER e, para parar, digite ENTER sem nenhum número na linha):\n");
 
-  result = quickSelect(arr, 0, tam - 1, k);
-  if(!error_k) printf("%d\n", result);
+  while (fgets(input, MAX_TAM_INPUT, stdin) != NULL) {
+      valor = strtol(input, &fimptr, 10);
+      if (fimptr == input || *fimptr != '\n') {
+          break;
+      }
+      acrescentaNaLista(&lista, (int)valor);
+      tam++;
+  }
+
+  vetor = listaParaVetor(lista, tam);
+
+  resultado = quickSelect(vetor, 0, tam - 1, k);
+  if(!error_k) printf("O elemento que está na %da posição desse vetor é: %d\n", k, resultado);
 
   return 0;
 }
