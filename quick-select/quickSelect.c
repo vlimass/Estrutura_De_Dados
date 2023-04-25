@@ -22,11 +22,11 @@ void acrescentaNaLista(Lista** lista, int valor) {
   if (*lista == NULL) {
       *lista = new_List;
   } else {
-      Lista* current = *lista;
-      while (current->next != NULL) {
-          current = current->next;
-      }
-      current->next = new_List;
+    Lista* current = *lista;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = new_List;
   }
 }
 
