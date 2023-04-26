@@ -39,6 +39,7 @@ int* listaParaVetor(Lista* vetor, int tamanho) {
       current = current->next;
       i++;
   }
+
   return novoVetor;
 }
 
@@ -72,15 +73,13 @@ int quickSelect(int vet[], int inicio, int fim, int k) {
 
     if (pos - inicio == k - 1) {
       return vet[pos];
-
     }
+
     if (pos - inicio > k - 1) {
       return quickSelect(vet, inicio, pos - 1, k);
-
     } 
     
     return quickSelect(vet, pos + 1, fim, k - pos + inicio - 1);
-       
   } else {
     // Caso de erro: valor de K é inválido
     error_k++;
@@ -125,10 +124,12 @@ int main(int argc, char *argv[]){
   printf("Insira os números do vetor (a cada número digite ENTER e, para parar, digite ENTER sem nenhum número na linha):\n");
 
   while (fgets(input, MAX_TAM_INPUT, stdin) != NULL) {
-    valor = strtol(input, &fimptr, 10);
+    valor = strtol(input, &fimptr, 10);   
+     
     if (fimptr == input || *fimptr != '\n') {
-        break;
+      break;
     }
+
     acrescentaNaLista(&lista, (int)valor);
     tam++;
   }
