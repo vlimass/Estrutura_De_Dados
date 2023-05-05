@@ -5,7 +5,7 @@
 #define MAX_TAM_INPUT 100
 
 typedef struct Lista {
-  int numVertices;
+  int numVert;
   struct Lista * prox;
 } Lista;
 
@@ -17,7 +17,7 @@ void insere(Lista **ptlista, int x){
     exit(1);
   }
 
-  novo->numVertices = x;
+  novo->numVert = x;
   novo->prox = *ptlista;
   *ptlista = novo;
 }
@@ -92,7 +92,7 @@ int main(int argc, char **argv){
   for(int i = 1; i <= vertices; i++){
     pt = adjacencias[i];
     while(pt != NULL){
-      grausEntrada[pt->numVertices]++;
+      grausEntrada[pt->numVert]++;
       pt = pt->prox;
     }
   }
@@ -111,7 +111,7 @@ int main(int argc, char **argv){
     pt = adjacencias[v];
 
     while(pt != NULL){
-      w = pt->numVertices;
+      w = pt->numVert;
       grausEntrada[w]--;
 
       if (grausEntrada[w] == 0){
