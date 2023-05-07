@@ -121,7 +121,7 @@ int main(int argc, char *argv[]){
     return 1;
   }
 
-  printf("Insira os números do vetor (a cada número digite ENTER e, para parar, digite ENTER sem nenhum número na linha):\n");
+  // printf("Insira os números do vetor (a cada número digite ENTER e, para parar, digite ENTER sem nenhum número na linha):\n");
 
   while (fgets(input, MAX_TAM_INPUT, stdin) != NULL) {
     valor = strtol(input, &fimptr, 10);   
@@ -137,7 +137,9 @@ int main(int argc, char *argv[]){
   vetor = listaParaVetor(lista, tam);
 
   resultado = quickSelect(vetor, 0, tam - 1, k);
-  if(!error_k) printf("O elemento que está na %da posição desse vetor é: %d\n", k, resultado);
+
+  // Impressão do resultado
+  if(!error_k) printf("%d\n", resultado);
 
   return 0;
 }
