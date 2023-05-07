@@ -33,7 +33,7 @@ int main(int argc, char **argv){
   }
     
   // Input do número de vértices e arestas
-  printf("Insira o número de vértices e arestas ({VÉRTICES} + space + {ARESTAS}) e, depois, coloque o valor dos vértices conectados a cada vértice por linha em ordem crescente (a cada entrada, digite ENTER para computar os valores):\n");
+  // printf("Insira o número de vértices e arestas ({VÉRTICES} + space + {ARESTAS}) e, depois, coloque o valor dos vértices conectados a cada vértice por linha em ordem crescente (a cada entrada, digite ENTER para computar os valores):\n");
 
   scanf("%[^\n]", entrada);
   sscanf(entrada, "%d %d", &vertices, &arestas);
@@ -124,7 +124,7 @@ int main(int argc, char **argv){
   } 
 
   // Impressão dos resultados
-  printf("-> Ordenação topológica: ");
+  printf("\n");
   for(int i = 0; i < vertices; i++){
     printf("%d ", ordem[i]);
   }
